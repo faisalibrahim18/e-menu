@@ -265,22 +265,36 @@ function CheckOut({
             });
         }
         Swal.fire({
-          title: "Pesanan Berhasil",
-          text: "",
           icon: "success",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Clear the cart from local storage
-            localStorage.removeItem("cart");
-
-            // Delay for 2 seconds (2000 milliseconds) before closing the modal and reloading the window
-            setTimeout(() => {
-              setIsModalOpen(false);
-              window.location.reload();
-              // or router.push({ name: 'AllMenu' }); if you are using a router
-            }, 2000);
-          }
+          title: "Pesanan Berhasil",
+          showConfirmButton: false,
+          timer: 2000,
+          customClass: {
+            title: "text-lg",
+          },
+        }).then(() => {
+          // You might want to navigate back or perform other actions
+          localStorage.removeItem("cart");
+          window.location.reload();
+          setIsModalOpen(false);
         });
+        // Swal.fire({
+        //   title: "Pesanan Berhasil",
+        //   text: "",
+        //   icon: "success",
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+        //     // Clear the cart from local storage
+        //     localStorage.removeItem("cart");
+
+        //     // Delay for 2 seconds (2000 milliseconds) before closing the modal and reloading the window
+        //     setTimeout(() => {
+        //       setIsModalOpen(false);
+        //       window.location.reload();
+        //       // or router.push({ name: 'AllMenu' }); if you are using a router
+        //     }, 2000);
+        //   }
+        // });
       }
     } catch (error) {
       console.log("ERROR CHECKOUT", error);

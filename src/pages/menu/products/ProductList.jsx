@@ -3,6 +3,7 @@ import ProductList1 from "../../../components/menu/product/ProductList";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { checkTokenExpiration } from "../../../utils/token";
+import BottomBar from "../../../components/bottombar/BottomBar";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -26,9 +27,12 @@ const ProductList = () => {
   });
 
   return (
-    <div>
-      <ProductList1 />
-    </div>
+    <>
+      <div>
+        <ProductList1 />
+      </div>
+      <BottomBar />
+    </>
   );
 };
 
