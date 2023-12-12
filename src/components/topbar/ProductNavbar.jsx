@@ -110,8 +110,8 @@ const ProductNavbar = ({ loading }) => {
                 </div>
               ) : (
                 <Link to={"/menu/order/all-menu"}>
-                  <div className="font-semibold text-white flex -mt-[16px]">
-                    <div className="text-3xl transform -rotate-12 -mt-[6px]">
+                  <div className="font-semibold text-white flex -mt-[14px]">
+                    <div className="text-3xl transform -rotate-12 -mt-[5px]">
                       e
                     </div>
                     <div className="text-3xl text-yellow-500 -mt-1">-</div>
@@ -140,7 +140,7 @@ const ProductNavbar = ({ loading }) => {
                     <div>
                       {" "}
                       {totalItems > 0 && ( // Tampilkan notifikasi angka hanya jika ada item dalam keranjang
-                        <span className="absolute top-5 right-0 bg-red-500 text-white rounded-full px-1 text-xs">
+                        <span className="absolute top-[22px] right-0 bg-red-500 text-white rounded-full px-1 text-xs">
                           {totalItems}
                         </span>
                       )}{" "}

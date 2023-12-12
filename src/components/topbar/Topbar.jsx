@@ -224,7 +224,7 @@ const Topbar = ({ detail, outlet, products, setSearchTermOutlet, loading }) => {
           <nav className="bg-[#6E205E] shadow-md fixed w-full z-50 max-w-full mx-auto px-4 sm:px-6 lg:px-8">
             <div className="h-[60px]">
               <div className="flex">
-                <div className="mt-[20px]">
+                <div className="mt-[21px]">
                   <button
                     onClick={() => window.history.back()}
                     className="text-xl text-white"
@@ -237,13 +237,13 @@ const Topbar = ({ detail, outlet, products, setSearchTermOutlet, loading }) => {
                 ) : (
                   <>
                     {products && products.length > 0 ? (
-                      <div className="w-full lg:pl-0 pl-10  text-white font-semibold pt-3 mt-2mt-[18px]  md:mt-2.5 lg:mt-3 text-center">
+                      <div className="w-full lg:pl-0 pl-10  text-white font-semibold pt-3 mt-[20px]  md:mt-2.5 lg:mt-3 text-center">
                         <div key={products[0].id}>
                           <div>{products[0].Business.name}</div>
                         </div>
                       </div>
                     ) : detail ? (
-                      <div className="w-full lg:pl-0 pl-10 text-white font-semibold  mt-[18px] md:mt-2.5 lg:mt-3 text-center">
+                      <div className="w-full lg:pl-0 pl-10 text-white font-semibold  mt-[19px] md:mt-2.5 lg:mt-3 text-center">
                         <div key={detail?.id}>
                           <div>{detail?.Business?.name}</div>
                         </div>
@@ -257,7 +257,7 @@ const Topbar = ({ detail, outlet, products, setSearchTermOutlet, loading }) => {
                 )}
 
                 <div className="flex">
-                  <div className="lg:text-xl text-xl mr-4 mt-[2px] lg:mt-1.5 md:mt-2">
+                  <div className="lg:text-xl text-xl mr-4 mt-[5px] lg:mt-1.5 md:mt-2">
                     <div className="relative text-left bottom-3">
                       <Link
                         to={"/products/keranjang"}
@@ -266,7 +266,7 @@ const Topbar = ({ detail, outlet, products, setSearchTermOutlet, loading }) => {
                       >
                         <FaShoppingCart />
                         {totalItems > 0 && (
-                          <span className="absolute top-5 right-0 bg-red-500 text-white rounded-full px-1 text-xs">
+                          <span className="absolute top-[17px] right-0 bg-red-500 text-white rounded-full px-1 text-xs">
                             {totalItems}
                           </span>
                         )}
@@ -286,11 +286,11 @@ const Topbar = ({ detail, outlet, products, setSearchTermOutlet, loading }) => {
                     </div>
                   </div>
 
-                  <div className="lg:mt-3 md:mt-4 mt-[28px] text-white">
+                  <div className="lg:mt-3 md:mt-4 mt-[30px] text-white">
                     {" "}
                     <Link to={"/menu/order/all-menu"}>
                       <div className="font-semibold text-white flex -mt-[16px]">
-                        <div className="text-3xl transform -rotate-12 -mt-[6px]">
+                        <div className="text-3xl transform -rotate-12 -mt-[5px]">
                           e
                         </div>
                         <div className="text-3xl text-yellow-500 -mt-1">-</div>
@@ -302,7 +302,7 @@ const Topbar = ({ detail, outlet, products, setSearchTermOutlet, loading }) => {
                 </div>
               </div>
             </div>
-            {/* <hr className="-mt-[26px]" /> */}
+            {/* <hr className="-mt-[23px]" /> */}
           </nav>
         ) : (
           <nav className="bg-[#6E205E] shadow-md fixed w-full z-50  mx-auto px-4 sm:px-6 lg:px-8">
