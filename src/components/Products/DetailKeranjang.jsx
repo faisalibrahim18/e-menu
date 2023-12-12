@@ -18,7 +18,7 @@ const DetailKeranjang = ({ itemId, onClose, fetchItemDetails }) => {
     fetchDetails();
   }, [itemId, fetchItemDetails]);
 
-  console.log("datdtautdaut", productDetails);
+  // console.log("datdtautdaut", productDetails);
   return (
     <div className="fixed z-50  inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20">

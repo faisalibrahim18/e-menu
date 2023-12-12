@@ -5,6 +5,7 @@ import Loading from "../Loading/Loading";
 import Mt from "../../assets/mt.jpg";
 import { nanoid } from "nanoid";
 import dayjs from "dayjs";
+import { BsRecordFill } from "react-icons/bs";
 
 function CheckOut({
   isOpen,
@@ -57,7 +58,7 @@ function CheckOut({
   const handleDateTime = () => {
     const date = dayjs(resDate).format("YYYY/MM/DD");
     const time = dayjs(resTime).format("HH:mm:ss");
-    console.log("date", date);
+    // console.log("date", date);
     setDateTime(`${date} ${time}`);
   };
 
@@ -74,7 +75,7 @@ function CheckOut({
         }
       );
 
-      console.log("table: ", response.data.data);
+      // console.log("table: ", response.data.data);
       setAllDataTable(response.data.data);
     } catch (error) {
       console.error(error);
@@ -109,8 +110,8 @@ function CheckOut({
         });
       }
 
-      console.log("taxPercentage", taxPercentage);
-      console.log("servicePercentage", servicePercentage);
+      // console.log("taxPercentage", taxPercentage);
+      // console.log("servicePercentage", servicePercentage);
 
       setTaxAndService({ tax: taxPercentage, charge: servicePercentage });
     } catch (error) {
@@ -141,10 +142,10 @@ function CheckOut({
     try {
       setDisabledButton(true);
       const dataTable = JSON.parse(localStorage.getItem("data_table"));
-      console.log("dataTable", dataTable.tableId);
+      // console.log("dataTable", dataTable.tableId);
 
       // const salesTypeId = await handleSalesType();
-      console.log("salesTypeId", getSalesType);
+      // console.log("salesTypeId", getSalesType);
 
       // setEnableWaiting(false);
       const tempItems = [];
@@ -152,7 +153,7 @@ function CheckOut({
         "ORDER_" +
         dayjs(new Date()).format("YY/MM/DD-HH/mm/ss") +
         dataBusiness.outlet_id;
-      console.log("receiptId", receiptId);
+      // console.log("receiptId", receiptId);
       // Retrieve cart items from local storage
       const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -228,7 +229,7 @@ function CheckOut({
           // console.log("deviceUser", deviceUser);
           const resultDevice = deviceUser.map((value) => value.device);
 
-          console.log("include_player_ids yang akan dikirim", resultDevice);
+          // console.log("include_player_ids yang akan dikirim", resultDevice);
           const bodyOneSignal = {
             app_id: "545db6bf-4448-4444-b9c8-70fb9fae225b",
             include_player_ids: resultDevice,
@@ -384,7 +385,17 @@ function CheckOut({
         const resultTotal = item.priceItem * item.totalItem;
         const tax = Math.ceil((resultTotal * taxAndService.tax) / 100);
         const service = Math.ceil((resultTotal * taxAndService.charge) / 100);
-        const paymentTotal = resultTotal;
+
+        // Calculate addons total
+        let addonsTotal = 0;
+        if (item.fullDataAddons) {
+          addonsTotal = item.fullDataAddons.reduce(
+            (accumulator, addon) => accumulator + addon.price,
+            0
+          );
+        }
+
+        const paymentTotal = resultTotal + addonsTotal;
 
         // Hitung resultAmount
         const resultTotalValue = Math.ceil(paymentTotal + tax + service);
@@ -404,6 +415,41 @@ function CheckOut({
       totalResultTotal,
     };
   };
+
+  // const calculateTotalPrice = () => {
+  //   let totalTax = 0;
+  //   let totalService = 0;
+  //   let totalPaymentTotal = 0;
+  //   let totalResultTotal = 0;
+
+  //   cart.forEach((item) => {
+  //     if (
+  //       selectedItems.includes(item.id) &&
+  //       selectedOutlets.includes(item.business)
+  //     ) {
+  //       const resultTotal = item.priceItem * item.totalItem;
+  //       const tax = Math.ceil((resultTotal * taxAndService.tax) / 100);
+  //       const service = Math.ceil((resultTotal * taxAndService.charge) / 100);
+  //       const paymentTotal = resultTotal;
+
+  //       // Hitung resultAmount
+  //       const resultTotalValue = Math.ceil(paymentTotal + tax + service);
+
+  //       // Accumulate totals
+  //       totalTax += tax;
+  //       totalService += service;
+  //       totalPaymentTotal += paymentTotal;
+  //       totalResultTotal += resultTotalValue;
+  //     }
+  //   });
+
+  //   return {
+  //     totalTax,
+  //     totalService,
+  //     totalPaymentTotal,
+  //     totalResultTotal,
+  //   };
+  // };
   const totalValues = calculateTotalPrice();
 
   const selectedItemsData = cart.filter((item) =>
@@ -460,20 +506,45 @@ function CheckOut({
                         </div>
                         <ul>
                           {selectedItemsData.map((item) => (
-                            <li
-                              key={item.id}
-                              className="flex justify-between pl-2"
-                            >
-                              <span>{item.nameItem}</span>
-                              <span className="flex items-center">
-                                <span className="w-16 text-right">
-                                  {item.totalItem}x
+                            <div key={item.id}>
+                              <div className="flex justify-between pl-2">
+                                <span>{item.nameItem}</span>
+                                <span className="flex items-center">
+                                  <span className="w-16 text-right">
+                                    {item.totalItem}x
+                                  </span>
+                                  <span className="w-24 text-right flex-grow">
+                                    Rp. {item.priceItem.toLocaleString("id-ID")}
+                                  </span>
                                 </span>
-                                <span className="w-24 text-right flex-grow">
-                                  Rp. {item.priceItem.toLocaleString("id-ID")}
-                                </span>
-                              </span>
-                            </li>
+                              </div>
+
+                              {/* Display addons if they exist */}
+                              {item.fullDataAddons &&
+                                item.fullDataAddons.length > 0 && (
+                                  <ul className="pl-5">
+                                    <div className="text-sm font-bold flex">
+                                      {" "}
+                                      <div className="mt-1.5 mr-1">
+                                        <BsRecordFill size={8} />
+                                      </div>
+                                      Add-On
+                                    </div>
+                                    {item.fullDataAddons.map((addon) => (
+                                      <li
+                                        key={addon.id}
+                                        className="flex justify-between pl-4 font-semibold"
+                                      >
+                                        <span> - {addon.name}</span>
+                                        <span>
+                                          Rp.{" "}
+                                          {addon.price.toLocaleString("id-ID")}
+                                        </span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                            </div>
                           ))}
 
                           <hr className="border-2 ml-2 border-gray-400 mb-2 mt-2 rounded-lg" />

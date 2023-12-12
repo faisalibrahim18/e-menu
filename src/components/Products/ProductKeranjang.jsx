@@ -65,16 +65,44 @@ const ProductKeranjang = () => {
 
   const calculateTotalPrice = () => {
     let total = 0;
+
     cart.forEach((item) => {
       if (
         selectedItems.includes(item.id) &&
         selectedOutlets.includes(item.business)
       ) {
-        total += item.priceItem * item.totalItem;
+        // Calculate the total price for the product without addons
+        let productTotal = item.priceItem * item.totalItem;
+
+        // Calculate the total price for addons
+        let addonsTotal = 0;
+        if (item.fullDataAddons) {
+          addonsTotal = item.fullDataAddons.reduce(
+            (accumulator, addon) => accumulator + addon.price,
+            0
+          );
+        }
+
+        // Add the product total and addons total to the overall total
+        total += productTotal + addonsTotal;
       }
     });
+
     return total;
   };
+
+  // const calculateTotalPrice = () => {
+  //   let total = 0;
+  //   cart.forEach((item) => {
+  //     if (
+  //       selectedItems.includes(item.id) &&
+  //       selectedOutlets.includes(item.business)
+  //     ) {
+  //       total += item.priceItem * item.totalItem;
+  //     }
+  //   });
+  //   return total;
+  // };
 
   const incrementQuantity = (item) => {
     const updatedCart = cart.map((cartItem) => {
@@ -359,8 +387,6 @@ const ProductKeranjang = () => {
                     ))}
                   </div>
                 ))}
-
-             
               </div>
             )}
           </div>
@@ -401,7 +427,7 @@ const ProductKeranjang = () => {
         <DetailKeranjang
           itemId={selectedDetailItemId}
           onClose={closeModalDetail}
-          fetchItemDetails={fetchItemDetails} 
+          fetchItemDetails={fetchItemDetails}
         />
       )}
       {isModalOpen && (
@@ -411,7 +437,7 @@ const ProductKeranjang = () => {
           closeModal={closeModal}
           loading={loading}
           selectedItems={selectedItems}
-          selectedOutlets={selectedOutlets} 
+          selectedOutlets={selectedOutlets}
         />
       )}
     </>

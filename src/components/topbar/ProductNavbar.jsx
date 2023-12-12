@@ -97,21 +97,21 @@ const ProductNavbar = ({ loading }) => {
 
   return (
     <>
-      <nav className="bg-[#6E205E] shadow-md fixed w-full z-50  mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:block md:block items-center justify-between h-20">
+      <nav className="bg-[#6E205E] shadow-md fixed w-full z-50  mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="lg:block md:block items-center justify-between h-[60px]">
           <div className="flex items-center ">
             <div className="flex-shrink-0">
               {isCartPage ? (
                 <div
-                  className="font-semibold text-white text-xl shadow cursor-pointer"
+                  className="font-semibold text-white text-xl -mt-[10px] cursor-pointer"
                   onClick={() => window.history.back()}
                 >
                   <FaArrowLeft />
                 </div>
               ) : (
                 <Link to={"/menu/order/all-menu"}>
-                  <div className="font-semibold text-white flex">
-                    <div className="text-3xl transform -rotate-12 -mt-1.5 mr-">
+                  <div className="font-semibold text-white flex -mt-[16px]">
+                    <div className="text-3xl transform -rotate-12 -mt-[6px]">
                       e
                     </div>
                     <div className="text-3xl text-yellow-500 -mt-1">-</div>
@@ -121,11 +121,11 @@ const ProductNavbar = ({ loading }) => {
               )}
             </div>
 
-            <div className="w-full text-white font-semibold  text-center">
+            <div className="w-full text-white font-semibold -mt-[12px]  text-center">
               {nameBusiness}
             </div>
             <div className="text-2xl ">
-              <div className="relative inline-block text-left">
+              <div className="relative inline-block text-left -mt-[12px]">
                 <Link
                   to={"/products/keranjang"}
                   className="text-white px-4 py-2 rounded-md  focus:outline-none hover:text-gray-200"
@@ -177,6 +177,7 @@ const ProductNavbar = ({ loading }) => {
             </div>
           </div>
         </div>
+        {/* <hr  className="-mt-[26px]"/> */}
       </nav>
     </>
   );
