@@ -448,7 +448,7 @@ const ProductDetail = () => {
                                   <p className="">{data2.name}</p>
                                 </div>
                                 <div className="text-right">
-                                  <p className="items-end flex ml-2">
+                                  <p className="items-end flex ml-2 mr-1.5">
                                     Rp. {data2.price.toLocaleString("id-ID")}
                                   </p>
                                 </div>
@@ -495,7 +495,7 @@ const ProductDetail = () => {
           </div>
 
           {/* sales type */}
-          <hr className="" />
+          {/* <hr className="" />
           <div className=" pl-2 bg-white pb-3">
             <div className="font-semibold">Sales Type</div>
             {salesType.map((data, index) => (
@@ -515,7 +515,7 @@ const ProductDetail = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* notes */}
           <div className="pl-2 mr-2 bg-white">
